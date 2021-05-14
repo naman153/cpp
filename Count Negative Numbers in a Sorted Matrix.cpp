@@ -1,5 +1,5 @@
 class Solution {
-public:
+public: 
     int countNegatives(vector<vector<int>>& grid) {
         long long int ans=0;
         for(int i=0;i<grid.size();i++){
