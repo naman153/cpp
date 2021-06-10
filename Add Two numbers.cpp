@@ -14,38 +14,40 @@ public:
         ListNode *temp;
         ListNode *headl2 = l2;
         int sum=0;
-        while((l1 != nullptr ||  l2 != nullptr)){
-            if(l1 != nullptr &&  l2 != nullptr){
-                sum=l1->val + l2->val + sum;
-                l2->val = sum%10;
+        while((l1 != nullptr ||  headl2 != nullptr)){
+            if(l1 != nullptr &&  headl2 != nullptr){
+                sum=l1->val + headl2->val + sum;
+                headl2->val = sum%10;
                 sum=int(sum/10);
-                temp=l2;
                 l1=l1->next;
-                l2=l2->next;
+                if(headl2->next == nullptr)
+                    temp=headl2;
+                headl2=headl2->next;
             }
-            else if(l1 != nullptr &&  l2 == nullptr){
+            else if(l1 != nullptr &&  headl2 == nullptr){
                 sum = l1->val + sum;
-                l2 = new ListNode(sum%10);
-                temp = l2;
+                temp->next = l1;
+                temp->next->val= sum%10;
                 sum=int(sum/10);
+                temp=temp->next;
                 l1=l1->next;
             }
-            else if(l1 == nullptr &&  l2 != nullptr){
-                sum = l2->val +sum;
-                l2->val = sum%10;
+            else if(l1 == nullptr &&  headl2 != nullptr){
+                sum = headl2->val +sum;
+                headl2->val = sum%10;
                 sum=int(sum/10);
-                temp = l2;
-                l2 = l2->next;
+                if(headl2->next == nullptr)
+                    temp = headl2;
+                headl2 = headl2->next;
             }
-            cout<<temp->val;
         }
-        if((l1 == nullptr &&  l2 == nullptr) && sum != 0){
+        if((l1 == nullptr &&  headl2 == nullptr) && sum != 0){
             struct ListNode *temp1 = new ListNode();
             temp1->val = sum%10;
             temp1->next= NULL;
             temp->next = temp1;
             sum=int(sum/10);
         }
-        return headl2;
+        return l2;
     }
 };
