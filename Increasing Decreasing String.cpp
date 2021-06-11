@@ -24,3 +24,35 @@ public:
         return ans;
     }
 };
+
+
+
+
+//second solution of problem
+
+class Solution {
+public:
+    string sortString(string s) {
+        sort(s.begin(),s.end());
+        string ans="";
+        while(ans.size() < s.size()){
+            for(int i=0;i<s.size();i++){
+                if(s[i] != s[i+1] && s[i] != '0'){
+                    ans.push_back(s[i]);
+                    s[i] ='0';
+                }
+            }
+            for(int i=s.size()-1;i>=1;i--){
+                if((s[i] != s[i-1]) && s[i] != '0'){
+                    ans.push_back(s[i]);
+                    s[i]='0';
+                }
+            }
+            if(s[0] != '0'){
+                    ans.push_back(s[0]);
+                    s[0]='0';
+            }
+        }
+        return ans;
+    }
+};
